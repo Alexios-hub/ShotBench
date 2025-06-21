@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Project website for WorldScore">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ShotBench</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/project.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/slick-theme.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery-migrate.min.js"></script>
+    <script src="assets/js/slick.min.js"></script>
+
+    <script type="text/javascript">
+        var sc_project=13109252; 
+        var sc_invisible=1; 
+        var sc_security="bbfbe108"; 
+        </script>
+        <script type="text/javascript"
+        src="https://www.statcounter.com/counter/counter.js"
+        async></script>
+        <noscript><div class="statcounter"><a title="Web Analytics"
+        href="https://statcounter.com/" target="_blank"><img
+        class="statcounter"
+        src="https://c.statcounter.com/13109252/0/bbfbe108/1/"
+        alt="Web Analytics"
+        referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+</head>
+
+<style>
+    .dimension-buttons{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px 20px;        
+        margin: 30px 0;        
+    }
+    .dimension-buttons .metric-button{
+        flex: 0 0 calc(25% - 20px);
+        margin: 0;                  
+        box-sizing: border-box;     
+    }  
+    #canvas-container {
+        background-color: rgb(178, 178, 178);
+    }
+    #canvas {
+        display: block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+    }
+    .container{
+        max-width: 1100px;
+    }
+    .full{
+        max-width: 1100px;
+    }
+    .arrow {
+        border: solid black;
+        border-width: 0 4px 4px 0;
+
+        position: absolute;
+        top: 50%;
+
+        width: 20px;
+        height: 20px;
+        -webkit-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+        cursor: pointer;
+    }
+
+    .right {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        right: -25px;
+    }
+
+    .left {
+        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+        left: -25px;
+    }
+
+    .nav-item {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+
+    .nav-item img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        width: 300px;
+    }
+
+    .nav-item p {
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 500;
+        line-height: 1.5rem;
+        font-size: 1.2rem;
+        color: black;
+    }
+
+    .interactive-item {
+        align-content: center;
+    }
+
+    .interactive-item video {
+        max-width: 100%;
+        justify-content: center;
+        align-items: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .interactive-item p {
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 500;
+        line-height: 1.5rem;
+        font-size: 1.2rem;
+        color: black;
+    }
+
+    .interactive-container {
+        margin-bottom: 0rem;
+        display: grid !important;
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr;
+        gap: 0% 1%;
+        justify-content: center;
+    }
+
+    .generated-container {
+      margin-bottom: 1rem;
+      display: grid !important;
+      grid-template-columns: 100%;
+      grid-template-rows: 1fr;
+      gap: 0% 1%;
+      justify-content: center;
+  }
+
+    .teaser-item {
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .two-column-section {
+        display: flex;
+        width: 100%;
+        margin-top: 5px;
+        padding: 5px 0;
+    }
+    
+    .two-column-section .column {
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .two-column-section .first-column {
+        width: 100%;
+        padding-left: 2%;
+    }
+    
+    .two-column-section .second-column {
+        width: 100%;
+        padding-right: 2%;
+    }
+
+    .two-column-section .body-text {
+        margin: 0;
+        padding: 5px 0;
+        text-align: center;
+    }
+
+    .slider-nav-interactive {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+
+    .slider-nav-interactive .slick-slide {
+        padding: 0 10px;
+    }
+
+    .metric-buttons {
+        text-align: center;
+        margin: 20px 0;
+    }
+    
+    .metric-button {
+        padding: 8px 16px;
+        margin: 0 8px;
+        border: 2px solid #333;
+        background-color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1rem;
+    }
+    
+    .metric-button:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .metric-button.active {
+        background-color: #333;
+        color: white;
+    }
+
+    .metric-button:not(.active) {
+        background-color: white !important;
+        color: #333 !important;
+    }
+
+    .metric-button.active {
+        background-color: #333 !important;
+        color: white !important;
+    }
+
+    .slider-for-interactive {
+        margin-bottom: 0;
+    }
+
+    .quality-button {
+        padding: 8px 16px;
+        margin: 0 8px;
+        border: 2px solid #333;
+        background-color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1rem;
+    }
+    
+    .quality-button:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .quality-button.active {
+        background-color: #333;
+        color: white;
+    }
+
+    .quality-button:not(.active) {
+        background-color: white !important;
+        color: #333 !important;
+    }
+
+    .quality-button.active {
+        background-color: #333 !important;
+        color: white !important;
+    }
+
+    .dynamics-button {
+        padding: 8px 16px;
+        margin: 0 8px;
+        border: 2px solid #333;
+        background-color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1rem;
+    }
+    
+    .dynamics-button:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .dynamics-button.active {
+        background-color: #333;
+        color: white;
+    }
+
+    .dynamics-button:not(.active) {
+        background-color: white !important;
+        color: #333 !important;
+    }
+
+    .dynamics-button.active {
+        background-color: #333 !important;
+        color: white !important;
+    }
+
+    .slick-dots li button:before {
+        font-size: 16px; 
+        width: 16px;      
+        height: 16px;     
+    }
+    
+
+    .slick-dots li {
+        margin: 0 12px;  
+    }
+    
+    .slick-dots li.slick-active button:before {
+        font-size: 20px;  
+        opacity: .75;
+    }
+
+    .score-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+        margin-top: 10px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1.0rem;
+        font-weight: 500;
+    }
+
+    .score-left, .score-right {
+        padding: 5px 15px;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+    }
+
+    .score-left {
+        color: #000000;  /* Green for better scores */
+    }
+
+    .score-right {
+        color: #000000;  /* Red for lower scores */
+    }
+
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    .comparison-table th, 
+    .comparison-table td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .comparison-table th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+    }
+
+    .comparison-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .comparison-table .bi-check {
+        color: #2ecc71;  /* 绿色 */
+        font-weight: bold;
+    }
+
+    .comparison-table .bi-x {
+        color: #e74c3c;  /* 红色 */
+        font-weight: bold;
+    }
+
+    .table-caption {
+        margin-top: 10px;
+        text-align: left;
+        font-style: italic;
+    }
+
+    .evaluation-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+    }
+
+    .evaluation-table th, 
+    .evaluation-table td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .evaluation-table th {
+        background-color: #f5f5f5;
+        font-weight: bold;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .evaluation-table th.sortable:hover {
+        background-color: #e5e5e5;
+    }
+
+    .evaluation-table th.sortable::after {
+        content: '↕';
+        position: absolute;
+        right: 8px;
+        opacity: 0.3;
+    }
+
+    .evaluation-table th.sorted-asc::after {
+        content: '↑';
+        opacity: 1;
+    }
+
+    .evaluation-table th.sorted-desc::after {
+        content: '↓';
+        opacity: 1;
+    }
+
+    .evaluation-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .evaluation-table .best-value {
+        font-weight: bold;
+        color: #2ecc71;
+    }
+
+    .evaluation-table .second-best-value {
+        text-decoration: underline;
+        color: #27ae60;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* 在<style>标签中添加以下CSS */
+    .comparison-table td {
+        font-size: 1.2em;  /* 调整符号大小 */
+    }
+
+    .comparison-table .check {
+        color: #2ecc71;  /* 鲜艳的绿色 */
+        font-weight: bold;
+    }
+
+    .comparison-table .x {
+        color: #e74c3c;  /* 鲜艳的红色 */
+        font-weight: bold;
+    }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .full-page-image {
+        max-width: 100%;
+        max-height: 100%;
+        position: relative;
+        width: 100%;
+        height: 100%; /* 使用视口高度单位使其全屏 */
+        overflow: hidden;
+    }
+
+    .full-page-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 保持图片比例并填充容器 */
+        object-position: center; /* 居中显示图片 */
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+</style>
+
+<body>
+
+    <section style="margin-top: 30px;">
+        <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+            <div class="row" id="title" style="width: 100%; text-align: center;">
+                <div class="col">
+                    <p class="text-center text-title" style="margin-bottom: 20px;">
+                        <span style="font-size: 1.4em; font-weight: bold; display: inline-block; width: 100%;">
+                            ShotBench
+                        </span>
+                        <br>
+                        <span style="font-size: 1em; display: block; margin-top: 10px;">
+                            Towards Deep Cinematic Understanding in Vision-Language Models
+                        </span>
+                    </p>
+                    <div class="is-size-5 publication-authors">
+                        <span class="list-inline-item mx-2">
+            
+                          <span class="list-inline-item mx-2">
+                              <a href="https://github.com/Alexios-hub" target="_blank">Hongbo Liu</a><sup>1, 2*</sup>,
+                          </span>
+                          <span class="list-inline-item mx-2">
+                              <a href="https://github.com/hejingwenhejingwen" target="_blank">Jingwen He</a><sup>3, 2*</sup>,
+                          </span>
+                          <span class="list-inline-item mx-2">
+                              <a href="https://github.com/MQN-80" target="_blank">Yi Jin</a><sup>1</sup>,
+                          </span>
+                          <span class="list-inline-item mx-2">
+                            <a href="https://zhengdian1.github.io/" target="_blank">Dian Zheng</a><sup>2</sup>,
+                          </span>
+                          <br>
+                          <span class="list-inline-item mx-2">
+                              <a href="https://scholar.google.com/citations?hl=zh-CN&user=kMui170AAAAJ" target="_blank">Yuhao Dong</a><sup>4</sup>,
+                          </span>
+                          <span class="list-inline-item mx-2">
+                            <a href="https://github.com/zhangfan-p" target="_blank">Fan Zhang</a><sup>2</sup>,
+                          </span>
+                          <span class="list-inline-item mx-2">
+                            <a href="https://ziqihuangg.github.io/" target="_blank">Ziqi Huang</a><sup>4</sup>,
+                          </span>
+                          <span class="list-inline-item mx-2">
+                            <a href="https://scholar.google.com/citations?user=EgfF_CEAAAAJ&hl=en" target="_blank">Yinan He</a><sup>2</sup>,
+                          </span>
+                          <span class="list-inline-item mx-2">
+                            <a href="https://dblp.org/pid/98/120-1.html" target="_blank">Weichao Chen</a><sup>1</sup>,
+                          </span>
+                          <span class="list-inline-item mx-2">
+                            <a href="https://mmlab.siat.ac.cn/yuqiao" target="_blank">Yu Qiao</a><sup>2</sup>,
+                          </span>
+                          <br>
+                          <span class="list-inline-item mx-2">
+                            <a href="https://wlouyang.github.io/" target="_blank">Wanli Ouyang</a><sup>3</sup>,
+                          </span>
+                          <span class="list-inline-item mx-2">
+                            <a href="https://orcid.org/0000-0002-4301-394X" target="_blank">Shengjie Zhao</a><sup>1</sup>,
+                          </span>
+                          <span class="list-inline-item mx-2">
+                            <a href="https://liuziwei7.github.io/" target="_blank">Ziwei Liu</a><sup>4</sup>
+                          </span>
+                      </div>
+                      <!-- <br> -->
+            
+                      <div class="is-size-5 publication-authors">
+                        <span class="list-inline-item mx-2">(* equal contributions) </span>
+                    </div>
+            
+                    <div class="is-size-5 publication-authors">
+                      <span class="list-inline-item mx-2">
+                        <sup>1</sup>
+                        Tongji University &nbsp;&nbsp;
+                        <sup>2</sup>
+                        Shanghai Artificial Intelligence Laboratory &nbsp;&nbsp;
+                        <br>
+                        <sup>3</sup>
+                        The Chinese University of Hong Kong &nbsp;&nbsp;
+                        <sup>4</sup>
+                        S-Lab, Nanyang Technological University &nbsp;&nbsp;
+                      </span>
+                    </div>
+        
+                    <div class="row" id="resources" style="margin-top: 30px;">
+                        <div class="col text-center mt-m4">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <a class="resource-button">
+                                        <i class="bi bi-file-earmark-text"></i>
+                                        Paper
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="resource-button">
+                                        <i class="bi bi-github"></i>
+                                        Code
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="resource-button">
+                                        <i class="bi bi-database"></i>
+                                        Dataset
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="resource-button">
+                                        <span class="icon">
+                                            🤗
+                                          </span>
+                                        Model
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> 
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col my-3">
+                    <p class="text-header"">
+                        Abstract
+                    </p>
+                    <div class="teaser-item">
+                        <p class="body-text">
+                            Cinematography is the fundamental visual language of film, essential for conveying narrative meaning, emotional depth, and overall filmmaking quality. While recent Vision-Language Models (VLMs) have demonstrated strong capabilities in general visual understanding, their proficiency in comprehending the nuanced cinematic grammar embedded within individual shots remains underexplored and inadequately evaluated. This critical gap hinders progress in fine-grained visual comprehension and limits the precision of AI-assisted video generation.
+To address this, we introduce <strong>ShotBench</strong>, a comprehensive benchmark for cinematic language understanding. It features 3,608 expert-annotated QA pairs from 3,549 images and video clips, meticulously curated from over 200 predominantly Oscar-nominated films, spanning eight cinematography dimensions. Our evaluation of 24 leading VLMs reveals substantial limitations; even the strongest model achieves less than 60% average accuracy, struggling with fine-grained visual cues and spatial reasoning.
+To advance this field, we construct <strong>ShotQA</strong>, a large-scale multimodal dataset with approximately 70k cinematic QA pairs. Leveraging ShotQA, we develop <strong>ShotVL</strong> by applying supervised fine-tuning and Group Relative Policy Optimization. ShotVL significantly outperforms all existing open-source and proprietary models on ShotBench, establishing new <strong>state-of-the-art</strong> performance. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="container">
+            <div class="container interactive-container">
+                    <div style="width: 100%;">
+                        <img src="assets/images/overview/figure1.jpg" alt="full screen" style="width: 100%; height: auto; display: block;">
+                    </div>
+            </div>
+            <div class="teaser-item">
+                <p class="body-text">
+                    Here we show the overview of ShotBench. The benchmark covers eight core dimensions of cinematography: <em>shot size</em>, <em>framing</em>, <em>camera angle</em>, <em>lens size</em>, <em>lighting type</em>, <em>lighting condition</em>, <em>composition</em>, and <em>camera movement</em>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row" id="abstract">
+                <div class="col my-3">
+                    <p class="text-header">
+                        Comparison of Benchmarks
+                    </p>
+                    <div class="table-responsive">
+                        <table class="evaluation-table">
+                        <thead>
+                            <tr>
+                                <th>Benchmark</th>
+                                <th>Train Data</th>
+                                <th>Shot Size</th>
+                                <th>Shot Framing</th>
+                                <th>Camera Angle</th>
+                                <th>Lens Size</th>
+                                <th>Lighting Type</th>
+                                <th>Lighting Condition</th>
+                                <th>Composition</th>
+                                <th>Camera Movement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>MovieShots</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>✅</td>
+                            </tr>
+                            <tr>
+                                <td>MovieNet</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>✅</td>
+                            </tr>
+                            <tr>
+                                <td>CineScale2</td>
+                                <td>✅</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>✅</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                            </tr>
+                            <tr>
+                                <td>CameraBench</td>
+                                <td>✅</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>❌</td>
+                                <td>✅</td>
+                            </tr>
+                            <tr>
+                                <td>CineTechBench</td>
+                                <td>❌</td>
+                                <td>✅</td>
+                                <td>❌</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>❌</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ShotBench (Ours)</strong></td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                                <td>✅</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Camera Movement Section (Separate from the Dimension buttons) -->
+<section id="camera-movement">
+    <div class="container">
+        <div class="row">
+            <div class="col my-3">
+                <p class="text-header">Visualization</p>
+                <div class="container slider-nav-interactive">
+                    <div class="container nav-item">
+                        <p>Push in</p>
+                    </div>
+                    <div class="container nav-item">
+                        <p>Zoom in</p>
+                    </div>
+                    <div class="container nav-item">
+                        <p>Pull out</p>
+                    </div>
+                    <div class="container nav-item">
+                        <p>Zoom out</p>
+                    </div>
+                    <div class="container nav-item">
+                        <p>Dolly zoom</p>
+                    </div>
+                    <div class="container nav-item">
+                        <p>Tilt down</p>
+                    </div>
+                    <div class="container nav-item">
+                        <p>Static shot</p>
+                    </div>
+                    <div class="container nav-item">
+                        <p>Trucking left</p>
+                    </div>
+                    <div class="container nav-item">
+                        <p>Firstly Trucking left, then Trucking left and Camera roll.</p>
+                    </div>
+                    <div class="container nav-item">
+                        <p>Boom up</p>
+                    </div>
+                </div>
+
+                <div class="container slider-for-interactive">
+                    <div class="container interactive-container">
+                      <div class="interactive-item">
+                        <video id="bg-video" muted controls loop playsinline webkit-playsinline preload="none">
+                          <source src="assets/videos/Push in.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                    </div>
+                    <div class="container interactive-container">
+                      <div class="interactive-item">
+                        <video id="bg-video" muted controls loop playsinline webkit-playsinline preload="none">
+                          <source data-lazy="assets/videos/Zoom in.mp4" type="video/mp4">
+                        </video>
+                      </div>
+                    </div>
+                    <div class="container interactive-container">
+                        <div class="interactive-item">
+                          <video id="bg-video" muted controls loop playsinline webkit-playsinline preload="none">
+                            <source data-lazy="assets/videos/Pull out.mp4" type="video/mp4">
+                          </video>
+                        </div>
+                      </div>
+                      <div class="container interactive-container">
+                        <div class="interactive-item">
+                          <video id="bg-video" muted controls loop playsinline webkit-playsinline preload="none">
+                            <source data-lazy="assets/videos/Zoom out.mp4" type="video/mp4">
+                          </video>
+                        </div>
+                      </div>
+                      <div class="container interactive-container">
+                        <div class="interactive-item">
+                          <video id="bg-video" muted controls loop playsinline webkit-playsinline preload="none">
+                            <source data-lazy="assets/videos/Dolly zoom.mp4" type="video/mp4">
+                          </video>
+                        </div>
+                      </div>
+                      <div class="container interactive-container">
+                        <div class="interactive-item">
+                          <video id="bg-video" muted controls loop playsinline webkit-playsinline preload="none">
+                            <source data-lazy="assets/videos/Tilt down.mp4" type="video/mp4">
+                          </video>
+                        </div>
+                      </div>
+                      <div class="container interactive-container">
+                        <div class="interactive-item">
+                          <video id="bg-video" muted controls loop playsinline webkit-playsinline preload="none">
+                            <source data-lazy="assets/videos/Static shot.mp4" type="video/mp4">
+                          </video>
+                        </div>
+                      </div>
+                      <div class="container interactive-container">
+                        <div class="interactive-item">
+                          <video id="bg-video" muted controls loop playsinline webkit-playsinline preload="none">
+                            <source data-lazy="assets/videos/Trucking left.mp4" type="video/mp4">
+                          </video>
+                        </div>
+                      </div>
+                      <div class="container interactive-container">
+                        <div class="interactive-item">
+                          <video id="bg-video" muted controls loop playsinline webkit-playsinline preload="none">
+                            <source data-lazy="assets/videos/Firstly Trucking left, then Trucking left and Camera roll.mp4" type="video/mp4">
+                          </video>
+                        </div>
+                      </div>
+                      <div class="container interactive-container">
+                        <div class="interactive-item">
+                          <video id="bg-video" muted controls loop playsinline webkit-playsinline preload="none">
+                            <source data-lazy="assets/videos/Boom up.mp4" type="video/mp4">
+                          </video>
+                        </div>
+                      </div>
+                    <!-- Continue with other videos -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    document.querySelectorAll('.metric-button[data-dim]').forEach(btn => {
+        btn.addEventListener('click', function () {
+            // Activate button
+            const peers = this.parentElement.querySelectorAll('.metric-button');
+            peers.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+    
+            // Switch the visible content panel
+            document.querySelectorAll('.dimension-content').forEach(ctn => ctn.style.display = 'none');
+            const key = this.getAttribute('data-dim');
+            document.getElementById(`${key}-content`).style.display = '';
+    
+            // Make slick refresh properly in new panel
+            $('.slider-for-interactive, .slider-nav-interactive').slick('setPosition');
+        });
+    });
+</script>
+
+    <section id="dimensions">
+        <div class="container">
+            <div class="row">
+                <div class="col my-3">
+                    <!-- <p class="text-header">Image</p> -->
+                    <div class="metric-buttons dimension-buttons">
+                        <button class="metric-button active" data-dim="shot-size">Shot&nbsp;Size</button>
+                        <button class="metric-button" data-dim="shot-framing">Shot&nbsp;Framing</button>
+                        <button class="metric-button" data-dim="camera-angle">Camera&nbsp;Angle</button>
+                        <button class="metric-button" data-dim="lens-size">Lens&nbsp;Size</button>
+                        <button class="metric-button" data-dim="lighting-type">Lighting&nbsp;Type</button>
+                        <button class="metric-button" data-dim="lighting-cond">Lighting&nbsp;Condition</button>
+                        <button class="metric-button" data-dim="composition">Composition</button>
+                    </div>
+                </div>
+            </div>
+
+  
+    <!-- 1. Shot Size -->
+    <div class="dimension-content" id="shot-size-content">
+      <div class="container generated-container">
+        <img src="assets/images/dimensions/shot_size.jpg" class="img-fluid" alt="Shot Size case">
+      </div>
+    </div>
+  
+    <!-- 2. Shot Framing -->
+    <div class="dimension-content" id="shot-framing-content" style="display:none;">
+      <div class="container generated-container">
+        <img src="assets/images/dimensions/shot_framing.jpg" class="img-fluid" alt="Shot Framing case">
+      </div>
+    </div>
+  
+    <!-- 3. Camera Angle -->
+    <div class="dimension-content" id="camera-angle-content" style="display:none;">
+      <div class="container generated-container">
+        <img src="assets/images/dimensions/camera_angle.jpg" class="img-fluid" alt="Camera Angle case">
+      </div>
+    </div>
+  
+    <!-- 4. Lens Size -->
+    <div class="dimension-content" id="lens-size-content" style="display:none;">
+      <div class="container generated-container">
+        <img src="assets/images/dimensions/lens_size.jpg" class="img-fluid" alt="Lens Size case">
+      </div>
+    </div>
+  
+    <!-- 5. Lighting Type -->
+    <div class="dimension-content" id="lighting-type-content" style="display:none;">
+      <div class="container generated-container">
+        <img src="assets/images/dimensions/lighting_type.jpg" class="img-fluid" alt="Lighting Type case">
+      </div>
+    </div>
+  
+    <!-- 6. Lighting Condition -->
+    <div class="dimension-content" id="lighting-cond-content" style="display:none;">
+      <div class="container generated-container">
+        <img src="assets/images/dimensions/lighting_condition.jpg" class="img-fluid" alt="Lighting Condition case">
+      </div>
+    </div>
+  
+    <!-- 7. Composition -->
+    <div class="dimension-content" id="composition-content" style="display:none;">
+      <div class="container generated-container">
+        <img src="assets/images/dimensions/composition.jpg" class="img-fluid" alt="Composition case">
+      </div>
+    </div>
+
+    </div>
+  </section>
+  
+  <script>
+    document.querySelectorAll('.metric-button[data-dim]').forEach(btn => {
+      btn.addEventListener('click', function () {
+        // 激活按钮
+        const peers = this.parentElement.querySelectorAll('.metric-button');
+        peers.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+    
+        // 切换可见的内容面板
+        document.querySelectorAll('.dimension-content').forEach(ctn => ctn.style.display = 'none');
+        const key = this.getAttribute('data-dim');
+        document.getElementById(`${key}-content`).style.display = '';
+    
+        $('.slider-for-interactive, .slider-nav-interactive').slick('setPosition');
+      });
+    });
+    </script>
+  
+
+
+    <section>
+        <div class="container">
+            <div class="row" id="citation">
+                <div class="col my-3">
+                    <p class="text-header">
+                        Evaluation Results
+                    </p>
+                    <div class="body-text">
+                        <!-- See our <a><img src='https://img.shields.io/badge/Leaderboard-Huggingface-yellow?logo=huggingface&logoColor=yellow'></a> for the latest ranking and numerical results. -->
+                        We report the evaluation results for 24 VLMs and ShotVL below, ShotVL sets new <strong>SOTA</strong> overall performance across all evaluated models.
+                    </div>
+                    <div class="table-responsive">
+                        <table class="evaluation-table">
+                          <caption style="caption-side: top;">
+                            <small>
+                            Abbreviations adopted:&nbsp;
+                            SS = <em>Shot&nbsp;Size</em>,&nbsp;
+                            SF = <em>Shot&nbsp;Framing</em>,&nbsp;
+                            CA = <em>Camera&nbsp;Angle</em>,&nbsp;
+                            LS = <em>Lens&nbsp;Size</em>,&nbsp;
+                            LT = <em>Lighting&nbsp;Type</em>,&nbsp;
+                            LC = <em>Lighting&nbsp;Conditions</em>,&nbsp;
+                            SC = <em>Shot&nbsp;Composition</em>,&nbsp;
+                            CM = <em>Camera&nbsp;Movement</em>.&nbsp;
+                            <strong>Bold</strong> indicates the best result, and <u>underline</u> indicates the second best in each group.
+                            </small>
+                          </caption>
+                      
+                          <thead>
+                            <tr>
+                              <th>Models</th>
+                              <th>SS</th><th>SF</th><th>CA</th><th>LS</th><th>LT</th>
+                              <th>LC</th><th>SC</th><th>CM</th><th>Avg</th>
+                            </tr>
+                          </thead>
+                      
+                          <tbody>
+                            <!-- ---------- Open-Sourced ---------- -->
+                            <tr style="background-color:#f2f2f2;">
+                              <td colspan="10"><strong><em>Open-Sourced VLMs</em></strong></td>
+                            </tr>
+                      
+                            <tr><td>Qwen2.5-VL-3B-Instruct</td><td>54.6</td><td>56.6</td><td>43.1</td><td>36.6</td><td>59.3</td><td>45.1</td><td>41.5</td><td>25.8</td><td>45.3</td></tr>
+                            <tr><td>Qwen2.5-VL-7B-Instruct</td><td>69.1</td><td>73.5</td><td>53.2</td><td>47.0</td><td>60.5</td><td>47.4</td><td>49.9</td><td>23.8</td><td>53.1</td></tr>
+                            <tr><td>LLaVA-NeXT-Video-7B</td><td>35.9</td><td>37.1</td><td>32.5</td><td>27.8</td><td>50.9</td><td>31.7</td><td>28.0</td><td>30.0</td><td>34.2</td></tr>
+                            <tr><td>LLaVA-Video-7B-Qwen2</td><td>56.9</td><td>65.4</td><td>45.1</td><td>36.0</td><td>63.5</td><td>45.4</td><td>37.4</td><td>28.8</td><td>47.3</td></tr>
+                            <tr><td>LLaVA-Onevision-Qwen2-7B-Ov-Chat</td><td>58.4</td><td>71.0</td><td>52.3</td><td>38.7</td><td>59.5</td><td>44.9</td><td>50.9</td><td>35.2</td><td>51.4</td></tr>
+                            <tr><td>InternVL2.5-8B</td><td>56.3</td><td>70.3</td><td>50.8</td><td>41.1</td><td>60.2</td><td>45.1</td><td>50.1</td><td>28.8</td><td>50.3</td></tr>
+                            <tr><td>InternVL3-2B</td><td>56.3</td><td>56.0</td><td>44.4</td><td>34.6</td><td>56.8</td><td>44.6</td><td>43.0</td><td>35.0</td><td>46.3</td></tr>
+                            <tr><td>InternVL3-8B</td><td>62.1</td><td>65.8</td><td>46.8</td><td>42.9</td><td>58.0</td><td>44.3</td><td>46.8</td><td>40.8</td><td>50.9</td></tr>
+                            <tr><td>InternVL3-14B</td><td>59.6</td><td>82.2</td><td>55.4</td><td>40.7</td><td>61.7</td><td>44.6</td><td>51.1</td><td>34.2</td><td>53.7</td></tr>
+                            <tr><td>Internlm-xcomposer2d5-7B</td><td>51.1</td><td>71.0</td><td>39.8</td><td>32.7</td><td>59.3</td><td>35.7</td><td>35.7</td><td>36.6</td><td>45.2</td></tr>
+                            <tr><td>Ovis2-8B</td><td>35.9</td><td>37.1</td><td>32.5</td><td>27.8</td><td>50.9</td><td>31.7</td><td>28.0</td><td>31.8</td><td>34.5</td></tr>
+                            <tr><td>VILA1.5-3B</td><td>33.4</td><td>44.9</td><td>32.1</td><td>28.6</td><td>50.6</td><td>35.7</td><td>28.4</td><td>20.2</td><td>34.2</td></tr>
+                            <tr><td>VILA1.5-8B</td><td>40.6</td><td>44.5</td><td>39.1</td><td>29.7</td><td>48.9</td><td>32.9</td><td>34.4</td><td>33.0</td><td>37.9</td></tr>
+                            <tr><td>VILA1.5-13B</td><td>36.7</td><td>54.6</td><td>40.7</td><td>34.8</td><td>52.8</td><td>35.4</td><td>34.2</td><td>30.2</td><td>39.9</td></tr>
+                            <tr><td>Instructblip-vicuna-7B</td><td>27.0</td><td>27.9</td><td>34.5</td><td>29.4</td><td>44.4</td><td>29.7</td><td>27.1</td><td>23.6</td><td>30.5</td></tr>
+                            <tr><td>Instructblip-vicuna-13B</td><td>26.8</td><td>29.2</td><td>27.9</td><td>28.0</td><td>39.0</td><td>24.0</td><td>27.1</td><td>20.4</td><td>27.8</td></tr>
+                            <tr><td>InternVL2.5-38B</td><td>67.8</td><td><u>85.8</u></td><td>55.4</td><td>41.7</td><td>61.7</td><td>48.9</td><td>52.4</td><td>40.2</td><td>56.7</td></tr>
+                            <tr><td>InternVL3-38B</td><td>68.0</td><td>84.0</td><td>51.9</td><td>43.6</td><td>64.4</td><td>46.9</td><td>54.7</td><td>39.6</td><td>56.6</td></tr>
+                            <tr><td>Qwen2.5-VL-32B-Instruct</td><td>62.3</td><td>76.6</td><td>51.0</td><td>48.3</td><td>61.7</td><td>44.0</td><td>52.2</td><td>40.4</td><td>54.6</td></tr>
+                            <tr><td>Qwen2.5-VL-72B-Instruct</td><td><u>75.1</u></td><td>82.9</td><td>56.7</td><td>46.8</td><td>59.0</td><td><u>49.4</u></td><td>54.1</td><td>43.8</td><td>58.5</td></tr>
+                            <tr><td>InternVL3-78B</td><td>69.7</td><td>80.0</td><td>54.5</td><td>44.0</td><td><u>66.7</u></td><td>47.4</td><td>51.8</td><td>40.4</td><td>56.8</td></tr>
+                      
+                            <!-- ---------- Proprietary ---------- -->
+                            <tr style="background-color:#f2f2f2;">
+                              <td colspan="10"><strong><em>Proprietary VLMs</em></strong></td>
+                            </tr>
+                      
+                            <tr><td>Gemini-2.0-flash</td><td>48.9</td><td>75.5</td><td>44.6</td><td>31.9</td><td>62.2</td><td>48.9</td><td>52.4</td><td><u>46.0</u></td><td>51.3</td></tr>
+                            <tr><td>Gemini-2.5-flash-preview-04-17</td><td>57.7</td><td>82.9</td><td>51.4</td><td>43.8</td><td>65.7</td><td>45.7</td><td>45.9</td><td>41.0</td><td>54.3</td></tr>
+                            <tr><td>GPT-4o</td><td>69.3</td><td>83.1</td><td><u>58.2</u></td><td><u>48.9</u></td><td>63.2</td><td>48.0</td><td><u>55.2</u></td><td>43.6</td><td><u>58.7</u></td></tr>
+
+                            <!-- ---------- Ours ---------- -->
+                            <tr style="background-color:#f2f2f2;">
+                                <td colspan="10"><strong><em>Ours</em></strong></td>
+                                <tr><td><strong>ShotVL-3B</strong></td><td><strong>80.4</strong></td><td><strong>86.1</strong></td><td><strong>66.8</strong></td><td><strong>60.3</strong></td><td><strong>67.7</strong></td><td><strong>50.9</strong></td><td><strong>58.2</strong></td><td><strong>46.8</strong></td><td><strong>64.9</strong></td></tr>
+                              </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row" id="citation">
+                <div class="col my-3">
+                    <p class="text-header">
+                        BibTeX
+                    </p>
+                    <div class="citation-block" style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                        <pre id="citation-text" style="font-family: monospace; text-align: left;">
+
+</pre>
+                        <button onclick="copyBibTeX()" class="btn btn-primary mt-2" style="display: block; margin-left: 0;">
+                            <i class="bi bi-clipboard"></i> Copy BibTeX
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function copyBibTeX() {
+                const citationText = document.getElementById('citation-text').textContent;
+                navigator.clipboard.writeText(citationText).then(() => {
+                    const button = document.querySelector('.citation-block button');
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '<i class="bi bi-clipboard-check"></i> Copied!';
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+            }
+        </script>
+    </section>
+
+    <div style="height: 60px;"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // 为每个 slider-for-interactive 添加懒加载事件处理
+            $('.slider-for-interactive').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+                var video = $(slick.$slides[nextSlide]).find('video');
+                var videoSource = video.find('source[data-lazy]');
+                if (videoSource.length) {
+                    videoSource.attr('src', videoSource.data('lazy'));
+                    videoSource.removeAttr('data-lazy');
+                    video.get(0).load();
+                }
+            });
+
+            $('.slider-for-interactive').on('init', function(event, slick){
+                try {
+                    var firstVideo = $(slick.$slides[0]).find('video');
+                    if (firstVideo.length) {
+                        firstVideo[0].load();
+                        firstVideo[0].play();
+                    }
+
+                var firstVideoSource = firstVideo.find('source');
+                if (firstVideoSource.attr('data-lazy')) {
+                    firstVideoSource.attr('src', firstVideoSource.attr('data-lazy'));
+                    firstVideoSource.removeAttr('data-lazy');
+                    firstVideo[0].load();
+                    firstVideo[0].play();
+                }
+            } catch (err) {
+            }
+            });
+
+            // 切换后自动播放视频
+            $('.slider-for-interactive').on('afterChange', function(event, slick, currentSlide) {
+                var currentSlideElem = $(slick.$slides[currentSlide]);
+                var video = currentSlideElem.find('video');
+                if (video.length) {
+                    video[0].play();
+                }
+            });
+
+            // 更新 slider-for-interactive 的初始化配置
+            $('.slider-for-interactive').each(function() {
+                $(this).slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    asNavFor: $(this).parent().find('.slider-nav-interactive'),
+                    autoplay: true,
+                    speed: 300,
+                    autoplaySpeed: 100000,
+                    lazyLoad: 'ondemand'  // 添加懒加载配置
+                });
+            });
+
+            $('.slider-nav-interactive').each(function() {
+                $(this).slick({
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    asNavFor: $(this).parent().find('.slider-for-interactive'),
+                    dots: true,
+                    centerMode: true,
+                    centerPadding: '10%',
+                    focusOnSelect: true,
+                    nextArrow: '<div class="arrow right"></div>',
+                    prevArrow: '<div class="arrow left"></div>',
+                });
+            });
+
+
+            // 按钮点击处理
+            $('.metric-button').click(function() {
+                $('.metric-button').removeClass('active');
+                $(this).addClass('active');
+                
+                $('.metric-content').hide();
+                $('#' + $(this).data('metric') + '-content').show();
+                
+                $('.slider-for-interactive, .slider-nav-interactive').slick('setPosition');
+            });
+
+            // Quality button click handling
+            $('.quality-button').click(function() {
+                $('.quality-button').removeClass('active');
+                $(this).addClass('active');
+                
+                $('.quality-content').hide();
+                $('#' + $(this).data('quality') + '-content').show();
+                
+                $('.slider-for-interactive, .slider-nav-interactive').slick('setPosition');
+            });
+
+            // Dynamics button click handling
+            $('.dynamics-button').click(function() {
+                $('.dynamics-button').removeClass('active');
+                $(this).addClass('active');
+                
+                $('.dynamics-content').hide();
+                $('#' + $(this).data('dynamics') + '-content').show();
+                
+                $('.slider-for-interactive, .slider-nav-interactive').slick('setPosition');
+            }); 
+
+            $('.slider-for-interactive').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                asNavFor: '.slider-nav-interactive',
+                autoplay: true,
+                speed: 300,
+                autoplaySpeed: 100000,
+            });
+
+            $('.slider-nav-interactive').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                asNavFor: '.slider-for-interactive',
+                dots: true,
+                centerMode: true,
+                centerPadding: '10%',
+                focusOnSelect: true,
+                nextArrow: '<div class="arrow right"></div>',
+                prevArrow: '<div class="arrow left"></div>',
+            });
+
+        });
+    </script>
+    <script src="assets/js/canvas.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const videos = document.querySelectorAll('video[muted][loop]');
+
+            const options = {
+                root: null, // sets the framing element to the viewport
+                threshold: 0.5 // at least 50% of the video must be visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.play();
+                    } else {
+                        entry.target.pause();
+                        entry.target.currentTime = 0; // Reset the video to the beginning
+                    }
+                });
+            }, options);
+
+            videos.forEach(video => {
+                observer.observe(video);
+            });
+        });
+
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const videoElement = document.getElementById('bg-video');
+    
+        // When the video metadata is loaded
+        videoElement.addEventListener('loadedmetadata', function () {
+            // Start playing the video
+            videoElement.play();
+            // Gradually fade in the video after it finishes loading
+            videoElement.style.opacity = 1.0;
+        });
+
+        if (videoElement.readyState >= 3) {
+            videoElement.play();
+            videoElement.style.opacity = 1.0;
+        }
+    });
+    </script>
+
+</body>
+
+</html>
+
+
+
+
+   
