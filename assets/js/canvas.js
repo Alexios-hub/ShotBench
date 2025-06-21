@@ -1027,7 +1027,3 @@ async function main() {
         }
 
 }
-
-main().catch((err) => {
-    document.getElementById("message").innerText = err.toString();
-});
