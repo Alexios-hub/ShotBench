@@ -313,7 +313,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
               <div class="interactive-item">
                 <span class="video-label">Zoom in</span>
                 <video muted controls loop playsinline webkit-playsinline preload="none">
-                  <source data-lazy="assets/videos/Zoom in.mp4" type="video/mp4">
+                  <source src="assets/videos/Zoom in.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
@@ -322,7 +322,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                 <div class="interactive-item">
                   <span class="video-label">Pull out</span>
                   <video muted controls loop playsinline webkit-playsinline preload="none">
-                    <source data-lazy="assets/videos/Pull out.mp4" type="video/mp4">
+                    <source src="assets/videos/Pull out.mp4" type="video/mp4">
                   </video>
                 </div>
               </div>
@@ -331,7 +331,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                 <div class="interactive-item">
                   <span class="video-label">Zoom out</span>
                   <video muted controls loop playsinline webkit-playsinline preload="none">
-                    <source data-lazy="assets/videos/Zoom out.mp4" type="video/mp4">
+                    <source src="assets/videos/Zoom out.mp4" type="video/mp4">
                   </video>
                 </div>
               </div>
@@ -340,7 +340,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                 <div class="interactive-item">
                   <span class="video-label">Dolly zoom</span>
                   <video muted controls loop playsinline webkit-playsinline preload="none">
-                    <source data-lazy="assets/videos/Dolly zoom.mp4" type="video/mp4">
+                    <source src="assets/videos/Dolly zoom.mp4" type="video/mp4">
                   </video>
                 </div>
               </div>
@@ -349,7 +349,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                 <div class="interactive-item">
                   <span class="video-label">Tilt down</span>
                   <video muted controls loop playsinline webkit-playsinline preload="none">
-                    <source data-lazy="assets/videos/Tilt down.mp4" type="video/mp4">
+                    <source src="assets/videos/Tilt down.mp4" type="video/mp4">
                   </video>
                 </div>
               </div>
@@ -358,7 +358,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                 <div class="interactive-item">
                   <span class="video-label">Static shot</span>
                   <video muted controls loop playsinline webkit-playsinline preload="none">
-                    <source data-lazy="assets/videos/Static shot.mp4" type="video/mp4">
+                    <source src="assets/videos/Static shot.mp4" type="video/mp4">
                   </video>
                 </div>
               </div>
@@ -367,16 +367,16 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                 <div class="interactive-item">
                   <span class="video-label">Trucking left</span>
                   <video muted controls loop playsinline webkit-playsinline preload="none">
-                    <source data-lazy="assets/videos/Trucking left.mp4" type="video/mp4">
+                    <source src="assets/videos/Trucking left.mp4" type="video/mp4">
                   </video>
                 </div>
               </div>
 
               <div class="container interactive-container">
                 <div class="interactive-item">
-                  <span class="video-label">Firstly Trucking left, then Trucking left and Camera roll</span>
+                  <span class="video-label">Firstly pan left, then pan right, finally pan left</span>
                   <video muted controls loop playsinline webkit-playsinline preload="none">
-                    <source data-lazy="assets/videos/Firstly Trucking left, then Trucking left and Camera roll.mp4" type="video/mp4">
+                    <source src="assets/videos/Firstly pan left, then pan right, finally pan left.mp4" type="video/mp4">
                   </video>
                 </div>
               </div>
@@ -385,7 +385,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                 <div class="interactive-item">
                   <span class="video-label">Boom up</span>
                   <video muted controls loop playsinline webkit-playsinline preload="none">
-                    <source data-lazy="assets/videos/Boom up.mp4" type="video/mp4">
+                    <source src="assets/videos/Boom up.mp4" type="video/mp4">
                   </video>
                 </div>
               </div>
@@ -628,51 +628,19 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('.slider-for-interactive').on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-                var video = $(slick.$slides[nextSlide]).find('video');
-                var videoSource = video.find('source[data-lazy]');
-                if (videoSource.length) {
-                    videoSource.attr('src', videoSource.data('lazy'));
-                    videoSource.removeAttr('data-lazy');
-                    video.get(0).load();
-                }
-            });
-
-            $('.slider-for-interactive').on('init', function(event, slick){
-                try {
-                    var firstVideo = $(slick.$slides[0]).find('video')[0];
-                    if (firstVideo){
-                        firstVideo.play();
-                        firstVideo.onended = function(){
-                            $(slick.$slider).slick('slickNext');
-                        };
-                        firstVideo.removeAttribute('loop');
-                    }
-                    
-
-                var firstVideoSource = firstVideo.find('source');
-                if (firstVideoSource.attr('data-lazy')) {
-                    firstVideoSource.attr('src', firstVideoSource.attr('data-lazy'));
-                    firstVideoSource.removeAttr('data-lazy');
-                    firstVideo[0].load();
-                    firstVideo[0].play();
-                }
-            } catch (err) {
+            function playVisibleVideos(slick, current){
+                const show = slick.options.slidesToShow;
+                $(slick.$slides).slice(current, current+show).find('video').each(function(){
+                    this.currentTime = 0;       // 从头开始
+                    const p = this.play();      // 返回 promise
+                    if (p !== undefined){ p.catch(()=>{}); }   // 吃掉浏览器自动暂停异常
+                });
             }
-            });
-
-            $('.slider-for-interactive').on('afterChange', function(event, slick, currentSlide){
-                var $curSlide = $(slick.$slides[currentSlide]);
-                var video = $curSlide.find('video')[0];
-                if (!video) return;
             
-                video.play();                 
+            $('.slider-for-interactive')
+              .on('init', function(e, slick){ playVisibleVideos(slick, 0); })
+              .on('afterChange', function(e, slick, curr){ playVisibleVideos(slick, curr); });
             
-                video.onended = function(){        
-                    $(slick.$slider).slick('slickNext');
-                };
-                video.removeAttribute('loop');    
-            });
             
 
 
@@ -704,15 +672,17 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
             }); 
 
             $('.slider-for-interactive').slick({
-                slidesToShow:1,
-                slidesToScroll:1,
-                autoplay:false,
-                infinite:true, 
+                slidesToShow:2,
+                slidesToScroll:2,
+                autoplay:true,
+                autoplaySpeed:6000,   // 6 秒
+                infinite:true,
                 speed:300,
-                lazyLoad:'ondemand',
                 prevArrow:'<button type="button" class="slick-prev"><i class="bi bi-chevron-left"></i></button>',
                 nextArrow:'<button type="button" class="slick-next"><i class="bi bi-chevron-right"></i></button>'
             });
+            
+            
 
         });
     </script>
