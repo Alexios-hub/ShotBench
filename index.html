@@ -699,9 +699,9 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
             function playVisibleVideos(slick, current){
                 const show = slick.options.slidesToShow;
                 $(slick.$slides).slice(current, current+show).find('video').each(function(){
-                    this.currentTime = 0;       // 从头开始
-                    const p = this.play();      // 返回 promise
-                    if (p !== undefined){ p.catch(()=>{}); }   // 吃掉浏览器自动暂停异常
+                    this.currentTime = 0;       
+                    const p = this.play();      
+                    if (p !== undefined){ p.catch(()=>{}); }   
                 });
             }
             
@@ -743,7 +743,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                 slidesToShow:2,
                 slidesToScroll:2,
                 autoplay:true,
-                autoplaySpeed:6000,   // 6 秒
+                autoplaySpeed:6000,   // 6 seconds
                 infinite:true,
                 speed:300,
                 prevArrow:'<button type="button" class="slick-prev"><i class="bi bi-chevron-left"></i></button>',
