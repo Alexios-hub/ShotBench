@@ -593,6 +593,74 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
             <div class="row" id="citation">
                 <div class="col my-3">
                     <p class="text-header">
+                        Analysis and Findings
+                    </p>
+                    <div class="body-text">
+                        (1) Approximately half of the evaluated models attain an overall accuracy below 50%. Even the leading models like GPT-4o, fail to reach 60% accuracy, underscoring the significant gap between current VLMs and a true understanding of cinematography.
+                    </div>
+                    <div class="body-text">
+                        (2) The overall performance differences between open-source and proprietary models are marginal.
+                    </div>
+                    <div class="body-text">
+                        (3) Within each series, larger models generally achieve higher accuracy.
+                    </div>
+                    <div class="body-text">
+                        (4) Stronger models perform well uniformly, without specific dimensional weaknesses.
+                    </div>
+                    <div class="body-text">
+                        (5) Fine-tuning with SFT and GRPO on the proposed ShotQA dataset effectively enhances the model's capability in cinematography understanding. Notably, the sequential training strategy of applying GRPO following SFT yields the best performance.
+                    </div>
+
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-lg-6 col-md-6 mb-4 d-flex flex-column">
+                          <figure class="w-100">
+                            <img src="assets/images/images/open_lmm_bar.jpg"
+                                 alt="Overall performance comparison across model families"
+                                 class="equal-height-img rounded shadow">
+                            <figcaption class="mt-2 small ps-1">
+                              Overall performance comparison of InternVL3, Qwen2.5-VL, and VILA-1.5 model families,
+                              highlighting variations by model size.
+                            </figcaption>
+                          </figure>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 mb-4 d-flex flex-column">
+                          <figure class="w-100">
+                            <img src="assets/images/images/shotbench_radar.jpg"
+                                 alt="Performance on cinematographic dimensions"
+                                 class="equal-height-img rounded shadow">
+                            <figcaption class="mt-2 small ps-1">
+                              Performance of six Vision-Language Models (VLMs) across cinematographic dimensions;
+                              stronger models show uniformly high scores without obvious weak spots.
+                            </figcaption>
+                          </figure>
+                        </div>
+                      </div>
+
+                      <div class="row justify-content-center mt-4">
+                        <div class="col-12">  
+                          <figure class="w-100">
+                            <img src="assets/images/images/shotbench_ablation.jpg"
+                                 alt="Performance comparison before and after GRPO"
+                                 class="img-fluid rounded shadow">
+                            <figcaption class="mt-2 small ps-1">
+                              Performance comparison across dimensions before and after applying GRPO
+                              under three training setups: baseline, SFT, and CoT-SFT.
+                            </figcaption>
+                          </figure>
+                        </div>
+                      </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row" id="citation">
+                <div class="col my-3">
+                    <p class="text-header">
                         BibTeX
                     </p>
                     <div class="citation-block" style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
