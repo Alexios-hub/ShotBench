@@ -708,3 +708,19 @@
     border-radius: 4px;
     pointer-events: none;
 }
+
+.slider-for-interactive .slick-slide{
+    padding-left:1px !important;   
+    padding-right:1px !important;
+}
+
+.slider-for-interactive .slick-list{
+    margin-left:-1px;
+    margin-right:-1px;
+}
+
+.slider-for-interactive .interactive-container{
+    padding-left:1px !important;
+    padding-right:1px !important;
+}
+
