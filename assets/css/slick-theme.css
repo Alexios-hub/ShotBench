@@ -720,6 +720,10 @@
     object-fit:contain;     
   }
 
-
-
-
+  .metric-button.always-on{
+    pointer-events:none;     
+    cursor:default;
+    background:#333 !important;  
+    color:#fff !important;
+    opacity:1 !important;  
+  }
