@@ -167,7 +167,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                     </div> -->
                 </div>
             </div>
-            <p class="text-header" style="margin-top: 20px;">Contributions</p>
+            <p class="text-header" style="margin-top: 20px;">Overview</p>
             <ul class="body-text" style="list-style-type: disc; padding-left: 1.2rem;">
                 <li><strong>ShotBench:</strong> We release the pioneering benchmark dedicated to comprehensively evaluating cinematic-language understanding across eight core dimensions and provide a systematic analysis of 24 leading VLMs to surface current limitations.</li>
                 <li><strong>ShotQA:</strong> We curate the first large‑scale multimodal QA dataset for cinematography understanding, containing ~70k high-quality QA pairs based on movie images and video clips, covering a broad range of cinematic concepts.</li>
@@ -194,14 +194,13 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
             <div class="row" id="abstract">
                 <div class="col my-3">
                     <p class="text-header">
-                        Comparison of Benchmarks
+                        Comparison of Benchmarks in Cinematography
                     </p>
                     <div class="table-responsive">
                         <table class="evaluation-table">
                         <thead>
                             <tr>
                                 <th>Benchmark</th>
-                                <th>Train Data</th>
                                 <th>Shot Size</th>
                                 <th>Shot Framing</th>
                                 <th>Camera Angle</th>
@@ -216,7 +215,6 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                             <tr>
                                 <td>MovieShots</td>
                                 <td>✅</td>
-                                <td>✅</td>
                                 <td>❌</td>
                                 <td>❌</td>
                                 <td>❌</td>
@@ -228,7 +226,6 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                             <tr>
                                 <td>MovieNet</td>
                                 <td>✅</td>
-                                <td>✅</td>
                                 <td>❌</td>
                                 <td>❌</td>
                                 <td>❌</td>
@@ -239,7 +236,6 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                             </tr>
                             <tr>
                                 <td>CineScale2</td>
-                                <td>✅</td>
                                 <td>❌</td>
                                 <td>❌</td>
                                 <td>✅</td>
@@ -251,7 +247,6 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                             </tr>
                             <tr>
                                 <td>CameraBench</td>
-                                <td>✅</td>
                                 <td>❌</td>
                                 <td>❌</td>
                                 <td>❌</td>
@@ -263,7 +258,6 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                             </tr>
                             <tr>
                                 <td>CineTechBench</td>
-                                <td>❌</td>
                                 <td>✅</td>
                                 <td>❌</td>
                                 <td>✅</td>
@@ -283,7 +277,6 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                                 <td>✅</td>
                                 <td>✅</td>
                                 <td>✅</td>
-                                <td>✅</td>
                             </tr>
                         </tbody>
                         </table>
@@ -293,15 +286,85 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
         </div>
     </section>
 
+    <section id="dimensions">
+      <div class="container">
+        <p class="text-header">Dataset Samples</p>
+        <p class="body-text">
+          Here we show some samples from ShotBench and ShotQA dataset. Please download the dataset from Huggingface to obtain the full version.
+        </p>
+          <div class="row">
+              <div class="col my-3">
+                  <!-- <p class="text-header">Image</p> -->
+                  <div class="metric-buttons dimension-buttons">
+                      <button class="metric-button active" data-dim="shot-size">Shot&nbsp;Size</button>
+                      <button class="metric-button" data-dim="shot-framing">Shot&nbsp;Framing</button>
+                      <button class="metric-button" data-dim="camera-angle">Camera&nbsp;Angle</button>
+                      <button class="metric-button" data-dim="lens-size">Lens&nbsp;Size</button>
+                      <button class="metric-button" data-dim="lighting-type">Lighting&nbsp;Type</button>
+                      <button class="metric-button" data-dim="lighting-cond">Lighting&nbsp;Condition</button>
+                      <button class="metric-button" data-dim="composition">Composition</button>
+                  </div>
+              </div>
+          </div>
+
+
+  <!-- 1. Shot Size -->
+  <div class="dimension-content" id="shot-size-content">
+    <div class="container generated-container">
+      <img src="assets/images/dimensions/shot_size.jpg" class="img-fluid" alt="Shot Size case">
+    </div>
+  </div>
+
+  <!-- 2. Shot Framing -->
+  <div class="dimension-content" id="shot-framing-content" style="display:none;">
+    <div class="container generated-container">
+      <img src="assets/images/dimensions/shot_framing.jpg" class="img-fluid" alt="Shot Framing case">
+    </div>
+  </div>
+
+  <!-- 3. Camera Angle -->
+  <div class="dimension-content" id="camera-angle-content" style="display:none;">
+    <div class="container generated-container">
+      <img src="assets/images/dimensions/camera_angle.jpg" class="img-fluid" alt="Camera Angle case">
+    </div>
+  </div>
+
+  <!-- 4. Lens Size -->
+  <div class="dimension-content" id="lens-size-content" style="display:none;">
+    <div class="container generated-container">
+      <img src="assets/images/dimensions/lens_size.jpg" class="img-fluid" alt="Lens Size case">
+    </div>
+  </div>
+
+  <!-- 5. Lighting Type -->
+  <div class="dimension-content" id="lighting-type-content" style="display:none;">
+    <div class="container generated-container">
+      <img src="assets/images/dimensions/lighting_type.jpg" class="img-fluid" alt="Lighting Type case">
+    </div>
+  </div>
+
+  <!-- 6. Lighting Condition -->
+  <div class="dimension-content" id="lighting-cond-content" style="display:none;">
+    <div class="container generated-container">
+      <img src="assets/images/dimensions/lighting_condition.jpg" class="img-fluid" alt="Lighting Condition case">
+    </div>
+  </div>
+
+  <!-- 7. Composition -->
+  <div class="dimension-content" id="composition-content" style="display:none;">
+    <div class="container generated-container">
+      <img src="assets/images/dimensions/composition.jpg" class="img-fluid" alt="Composition case">
+    </div>
+  </div>
+
+  </div>
+</section>
+
 <!-- Camera Movement Section -->
 <section id="camera-movement">
     <div class="container">
       <div class="row">
         <div class="col my-3">
-          <p class="text-header">Dataset</p>
-          <p class="body-text">
-            Here we show some samples from ShotBench and ShotQA dataset. Please download the dataset from Huggingface to obtain the full version.
-          </p>
 
           <div class="row mb-3">
             <div class="col text-center">
@@ -429,76 +492,6 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
         });
     });
 </script>
-
-    <section id="dimensions">
-        <div class="container">
-            <div class="row">
-                <div class="col my-3">
-                    <!-- <p class="text-header">Image</p> -->
-                    <div class="metric-buttons dimension-buttons">
-                        <button class="metric-button active" data-dim="shot-size">Shot&nbsp;Size</button>
-                        <button class="metric-button" data-dim="shot-framing">Shot&nbsp;Framing</button>
-                        <button class="metric-button" data-dim="camera-angle">Camera&nbsp;Angle</button>
-                        <button class="metric-button" data-dim="lens-size">Lens&nbsp;Size</button>
-                        <button class="metric-button" data-dim="lighting-type">Lighting&nbsp;Type</button>
-                        <button class="metric-button" data-dim="lighting-cond">Lighting&nbsp;Condition</button>
-                        <button class="metric-button" data-dim="composition">Composition</button>
-                    </div>
-                </div>
-            </div>
-
-  
-    <!-- 1. Shot Size -->
-    <div class="dimension-content" id="shot-size-content">
-      <div class="container generated-container">
-        <img src="assets/images/dimensions/shot_size.jpg" class="img-fluid" alt="Shot Size case">
-      </div>
-    </div>
-  
-    <!-- 2. Shot Framing -->
-    <div class="dimension-content" id="shot-framing-content" style="display:none;">
-      <div class="container generated-container">
-        <img src="assets/images/dimensions/shot_framing.jpg" class="img-fluid" alt="Shot Framing case">
-      </div>
-    </div>
-  
-    <!-- 3. Camera Angle -->
-    <div class="dimension-content" id="camera-angle-content" style="display:none;">
-      <div class="container generated-container">
-        <img src="assets/images/dimensions/camera_angle.jpg" class="img-fluid" alt="Camera Angle case">
-      </div>
-    </div>
-  
-    <!-- 4. Lens Size -->
-    <div class="dimension-content" id="lens-size-content" style="display:none;">
-      <div class="container generated-container">
-        <img src="assets/images/dimensions/lens_size.jpg" class="img-fluid" alt="Lens Size case">
-      </div>
-    </div>
-  
-    <!-- 5. Lighting Type -->
-    <div class="dimension-content" id="lighting-type-content" style="display:none;">
-      <div class="container generated-container">
-        <img src="assets/images/dimensions/lighting_type.jpg" class="img-fluid" alt="Lighting Type case">
-      </div>
-    </div>
-  
-    <!-- 6. Lighting Condition -->
-    <div class="dimension-content" id="lighting-cond-content" style="display:none;">
-      <div class="container generated-container">
-        <img src="assets/images/dimensions/lighting_condition.jpg" class="img-fluid" alt="Lighting Condition case">
-      </div>
-    </div>
-  
-    <!-- 7. Composition -->
-    <div class="dimension-content" id="composition-content" style="display:none;">
-      <div class="container generated-container">
-        <img src="assets/images/dimensions/composition.jpg" class="img-fluid" alt="Composition case">
-      </div>
-    </div>
-
-    </div>
-  </section>
   
   <script>
     document.querySelectorAll('.metric-button[data-dim]').forEach(btn => {

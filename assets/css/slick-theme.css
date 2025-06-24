@@ -730,12 +730,12 @@
 
 .slider-for-interactive {
     background: #000;              
-    padding: 10px 0;              
+    padding: 0 0;              
   }
   
 .slick-slide{
     background:#000;                 
-    min-height:360px;                
+    min-height:320px;                
     padding:0 !important;            
     display:flex !important;         
     justify-content:center;
@@ -755,4 +755,9 @@
     object-fit:contain;              
     background:#000;                
   }
+
+.metric-buttons {
+    justify-content: flex-start !important;
+  }
+  
   
