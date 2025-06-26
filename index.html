@@ -46,46 +46,49 @@
                         </span>
                         <br>
                         <span style="font-size: 1em; display: block; margin-top: 10px;">
-                          Expert-Level Cinematic Understanding in Vision-Language Models
+                          Expert-Level Cinematic Understanding<br>in Vision-Language Models
                         </span>
                     </p>
                     <div class="is-size-5 publication-authors">
                         <span class="list-inline-item mx-2">
             
                           <span class="list-inline-item mx-2">
-                              <a href="https://github.com/Alexios-hub" target="_blank">Hongbo Liu</a><sup>1, 2*</sup>,
+                              <a href="https://github.com/Alexios-hub" target="_blank">Hongbo Liu</a><sup>1, 3*</sup>,
                           </span>
                           <span class="list-inline-item mx-2">
-                              <a href="https://github.com/hejingwenhejingwen" target="_blank">Jingwen He</a><sup>3, 2*</sup>,
+                              <a href="https://github.com/hejingwenhejingwen" target="_blank">Jingwen He</a><sup>2, 3*</sup>,
                           </span>
                           <span class="list-inline-item mx-2">
                               <a href="https://github.com/MQN-80" target="_blank">Yi Jin</a><sup>1</sup>,
                           </span>
                           <span class="list-inline-item mx-2">
-                            <a href="https://zhengdian1.github.io/" target="_blank">Dian Zheng</a><sup>2</sup>,
+                            <a href="https://zhengdian1.github.io/" target="_blank">Dian Zheng</a><sup>3</sup>,
                           </span>
                           <br>
                           <span class="list-inline-item mx-2">
                               <a href="https://scholar.google.com/citations?hl=zh-CN&user=kMui170AAAAJ" target="_blank">Yuhao Dong</a><sup>4</sup>,
                           </span>
                           <span class="list-inline-item mx-2">
-                            <a href="https://github.com/zhangfan-p" target="_blank">Fan Zhang</a><sup>2</sup>,
+                            <a href="https://github.com/zhangfan-p" target="_blank">Fan Zhang</a><sup>3</sup>,
                           </span>
                           <span class="list-inline-item mx-2">
                             <a href="https://ziqihuangg.github.io/" target="_blank">Ziqi Huang</a><sup>4</sup>,
                           </span>
                           <span class="list-inline-item mx-2">
-                            <a href="https://scholar.google.com/citations?user=EgfF_CEAAAAJ&hl=en" target="_blank">Yinan He</a><sup>2</sup>,
+                            <a href="https://scholar.google.com/citations?user=EgfF_CEAAAAJ&hl=en" target="_blank">Yinan He</a><sup>3</sup>,
+                          </span>
+                          <span class="list-inline-item mx-2">
+                            <a href="https://yg256li.github.io/" target="_blank">Yangguang Li</a><sup>3</sup>,
                           </span>
                           <span class="list-inline-item mx-2">
                             <a href="https://dblp.org/pid/98/120-1.html" target="_blank">Weichao Chen</a><sup>1</sup>,
                           </span>
                           <span class="list-inline-item mx-2">
-                            <a href="https://mmlab.siat.ac.cn/yuqiao" target="_blank">Yu Qiao</a><sup>2</sup>,
+                            <a href="https://mmlab.siat.ac.cn/yuqiao" target="_blank">Yu Qiao</a><sup>3</sup>,
                           </span>
                           <br>
                           <span class="list-inline-item mx-2">
-                            <a href="https://wlouyang.github.io/" target="_blank">Wanli Ouyang</a><sup>3</sup>,
+                            <a href="https://wlouyang.github.io/" target="_blank">Wanli Ouyang</a><sup>2</sup>,
                           </span>
                           <span class="list-inline-item mx-2">
                             <a href="https://orcid.org/0000-0002-4301-394X" target="_blank">Shengjie Zhao</a><sup>1&dagger;</sup>,
@@ -105,10 +108,10 @@
                         <sup>1</sup>
                         Tongji University &nbsp;&nbsp;
                         <sup>2</sup>
-                        Shanghai Artificial Intelligence Laboratory &nbsp;&nbsp;
+                        The Chinese University of Hong Kong &nbsp;&nbsp;
                         <br>
                         <sup>3</sup>
-                        The Chinese University of Hong Kong &nbsp;&nbsp;
+                        Shanghai Artificial Intelligence Laboratory &nbsp;&nbsp;
                         <sup>4</sup>
                         S-Lab, Nanyang Technological University &nbsp;&nbsp;
                       </span>
@@ -169,9 +172,9 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
             </div>
             <p class="text-header" style="margin-top: 20px;">Overview</p>
             <ul class="body-text" style="list-style-type: disc; padding-left: 1.2rem;">
-                <li><strong>ShotBench:</strong> We construct ShotBench, a comprehensive benchmark specifically designed to assess VLMs' understanding of cinematic language. ShotBench comprises over 3.5k expert-annotated multiple-choice QA examples, meticulously curated from both images and video clips across over 200 films, predominantly those that have received Oscar nominations for Best Cinematography.</li>
-                <li><strong>ShotQA:</strong> We curate the first large‑scale multimodal QA dataset for cinematography understanding, containing ~70k high-quality QA pairs based on movie images and video clips, covering a broad range of cinematic concepts.</li>
-                <li><strong>ShotVL:</strong> We propose ShotVL, a novel thinking model trained on ShotQA with SFT and GRPO, achieving new state-of-the-art performance on cinematography understanding. </li>
+                <li>We introduce <strong>ShotBench</strong>, a comprehensive benchmark for evaluating VLMs’ understanding of cinematic language. It comprises over 3.5k expert-annotated QA pairs derived from images and video clips of over 200 critically acclaimed films (predominantly Oscar-nominated), covering eight distinct cinematography dimensions. This provides a rigorous new standard for assessing fine-grained visual comprehension in film.</li>
+                <li>We conducted an extensive evaluation of 24 leading VLMs, including prominent open-source and proprietary models, on ShotBench. Our results reveal a critical performance gap: even the most capable model, GPT-4o, achieves less than 60% average accuracy. This systematically quantifies the current limitations of VLMs in genuine cinematographic comprehension.</li>
+                <li>To address the identified limitations and facilitate future research, we constructed <strong>ShotQA</strong>, the first large-scale multimodal dataset for cinematography understanding, containing approximately 70k high-quality QA pairs. Leveraging ShotQA, we developed <strong>ShotVL</strong>, a novel VLM trained using Supervised Fine-Tuning (SFT) and Group Relative Policy Optimization (GRPO). ShotVL significantly surpasses all tested open-source and proprietary models, establishing a new state-of-the-art on ShotBench.</li>
             </ul>
         </div>
     
