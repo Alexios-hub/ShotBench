@@ -121,7 +121,7 @@
                         <div class="col text-center mt-m4">
                             <ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <a class="resource-button">
+                                    <a class="resource-button" href="https://arxiv.org/abs/2506.21356">
                                         <i class="bi bi-file-earmark-text"></i>
                                         Paper
                                     </a>
@@ -139,7 +139,7 @@
                                     </a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="resource-button" href="https://huggingface.co/Vchitect/ShotVL-7B">
+                                    <a class="resource-button" href="https://huggingface.co/collections/Vchitect/shot-vl-685e541cdc5583148b36c12f">
                                         <span class="icon">
                                             🤗
                                           </span>
@@ -216,7 +216,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                         </thead>
                         <tbody>
                             <tr>
-                                <td>MovieShots</td>
+                                <td><a href="https://arxiv.org/abs/2008.03548">MovieShots</a></td>
                                 <td>✅</td>
                                 <td>❌</td>
                                 <td>❌</td>
@@ -227,7 +227,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                                 <td>✅</td>
                             </tr>
                             <tr>
-                                <td>MovieNet</td>
+                                <td><a href="https://arxiv.org/abs/2007.10937">MovieNet</a></td>
                                 <td>✅</td>
                                 <td>❌</td>
                                 <td>❌</td>
@@ -238,7 +238,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                                 <td>✅</td>
                             </tr>
                             <tr>
-                                <td>CineScale2</td>
+                                <td><a href="https://pubmed.ncbi.nlm.nih.gov/37822886/">CineScale2</a></td>
                                 <td>❌</td>
                                 <td>❌</td>
                                 <td>✅</td>
@@ -249,7 +249,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                                 <td>❌</td>
                             </tr>
                             <tr>
-                                <td>CameraBench</td>
+                                <td><a href="https://arxiv.org/abs/2504.15376">CameraBench</a></td>
                                 <td>❌</td>
                                 <td>❌</td>
                                 <td>❌</td>
@@ -260,7 +260,7 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                                 <td>✅</td>
                             </tr>
                             <tr>
-                                <td>CineTechBench</td>
+                                <td><a href="https://arxiv.org/abs/2505.15145">CineTechBench</a></td>
                                 <td>✅</td>
                                 <td>❌</td>
                                 <td>✅</td>
@@ -579,18 +579,19 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
                     </div>
                     <div class="table-responsive">
                         <table class="evaluation-table">
-                          <caption style="caption-side: top;">
+                          <caption style="caption-side: top; color:#000; font-size:0.95rem;">
                             <small>
-                            Abbreviations adopted:&nbsp;
-                            SS = <em>Shot&nbsp;Size</em>,&nbsp;
-                            SF = <em>Shot&nbsp;Framing</em>,&nbsp;
-                            CA = <em>Camera&nbsp;Angle</em>,&nbsp;
-                            LS = <em>Lens&nbsp;Size</em>,&nbsp;
-                            LT = <em>Lighting&nbsp;Type</em>,&nbsp;
-                            LC = <em>Lighting&nbsp;Conditions</em>,&nbsp;
-                            SC = <em>Shot&nbsp;Composition</em>,&nbsp;
-                            CM = <em>Camera&nbsp;Movement</em>.&nbsp;
-                            <strong>Bold</strong> indicates the best result, and <u>underline</u> indicates the second best in each group.
+                              Abbreviations adopted:&nbsp;
+                              SS = <em>Shot&nbsp;Size</em>,&nbsp;
+                              SF = <em>Shot&nbsp;Framing</em>,&nbsp;
+                              CA = <em>Camera&nbsp;Angle</em>,&nbsp;
+                              LS = <em>Lens&nbsp;Size</em>,&nbsp;
+                              LT = <em>Lighting&nbsp;Type</em>,&nbsp;
+                              LC = <em>Lighting&nbsp;Conditions</em>,&nbsp;
+                              SC = <em>Shot&nbsp;Composition</em>,&nbsp;
+                              CM = <em>Camera&nbsp;Movement</em>.&nbsp;
+                              <u>underline</u> marks current best performance in each group.  
+                              <strong>Our <span style="background-color:#e8f9e8;">ShotVL</span> models establish the new overall SOTA.</strong>
                             </small>
                           </caption>
                       
@@ -641,9 +642,16 @@ To advance this field, we construct <strong>ShotQA</strong>, a large-scale multi
 
                             <!-- ---------- Ours ---------- -->
                             <tr style="background-color:#f2f2f2;">
-                                <td colspan="10"><strong><em>Ours</em></strong></td>
-                                <tr><td><strong>ShotVL-3B</strong></td><td><strong>77.9</strong></td><td><strong>85.6</strong></td><td><strong>68.8</strong></td><td><strong>59.3</strong></td><td><strong>65.7</strong></td><td><strong>53.1</strong></td><td><strong>57.4</strong></td><td><strong>51.7</strong></td><td><strong>65.1</strong></td></tr>
-                              </tr>
+                              <td colspan="10"><strong><em>Ours</em></strong></td>
+                            </tr>
+                            <tr style="background-color:#e8f9e8;">
+                              <td>ShotVL-3B <a href="https://huggingface.co/Vchitect/ShotVL-3B"><img src="https://img.shields.io/badge/Model-Huggingface-yellow?logo=huggingface&amp;logoColor=yellow"></a></td><td>77.9</td><td>85.6</td><td>68.8</td><td>59.3</td><td>65.7</td>
+                              <td>53.1</td><td>57.4</td><td>51.7</td><td>65.1</td>
+                            </tr>
+                            <tr style="background-color:#e8f9e8;">
+                              <td>ShotVL-7B <a href="https://huggingface.co/Vchitect/ShotVL-7B"><img src="https://img.shields.io/badge/Model-Huggingface-yellow?logo=huggingface&amp;logoColor=yellow"></a></td><td>81.2</td><td>90.1</td><td>78.0</td><td>68.5</td><td>70.1</td>
+                              <td>64.3</td><td>45.7</td><td>62.9</td><td>70.1</td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
