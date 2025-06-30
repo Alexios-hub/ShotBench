@@ -760,3 +760,17 @@
     justify-content: flex-start !important;
   }
   
+  .video-fixed {
+    width: 100%;
+    max-width: 100%; 
+    height: 500px;      
+    margin: 0 auto;
+  }
+  @media (max-width: 992px) {
+    .video-fixed { width: 100%; height: 360px; }
+  }
+  .video-fixed iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
